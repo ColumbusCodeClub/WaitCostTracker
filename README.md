@@ -1,1 +1,5 @@
-Run by doing "./gradlew run".
+To launch the app:
+```language-bash
+cd app
+./gradlew run
+```
