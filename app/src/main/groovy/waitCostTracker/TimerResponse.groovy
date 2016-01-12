@@ -1,0 +1,5 @@
+package waitCostTracker
+
+class TimerResponse {
+
+}
