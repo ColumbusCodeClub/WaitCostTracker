@@ -1,5 +1,8 @@
 package waitCostTracker
 
-class TimerResponse {
+import java.time.LocalDate
 
+class TimerResponse {
+	String id
+	LocalDate time
 }

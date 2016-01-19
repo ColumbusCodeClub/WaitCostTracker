@@ -1,6 +1,8 @@
 package org.orsh.waitCostTracker
 
-import org.junit.Test;
+import org.junit.Test
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
 import ratpack.handling.internal.DefaultContext;
@@ -44,12 +46,16 @@ class StartTimerFunctionalSpec extends Specification {
   
   def "should respond with a response"() {
 	  
+	  given:
+	  ObjectMapper objectMapper = new ObjectMapper();
+	 
 	  when:
-	  TimerResponse expected = new TimerResponse()
-	  def expectedJson = DefaultContext.current().render(json(expected))
+	  get("/timer/start")
+	  def response = objectMapper.readValue(response.body.text, TimerResponse.class)
 	  
 	  then:
-	  assert expectedJson == "foo"
+	  assert response.id != null
+	  assert response.time != null
   }
 
 
