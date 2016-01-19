@@ -47,7 +47,9 @@ class StartTimerFunctionalSpec extends Specification {
   def "should respond with a response"() {
 	  
 	  given:
+	  // TODO this is expensive -- we may want to create a global ObjectMapper somewhere
 	  ObjectMapper objectMapper = new ObjectMapper();
+	  objectMapper.findAndRegisterModules();
 	 
 	  when:
 	  get("/timer/start")

@@ -1,9 +1,10 @@
 import static ratpack.groovy.Groovy.ratpack
+import waitCostTracker.TimerResponse
 
 ratpack {
     handlers {
 		get("timer/start") {
-			render '"time": "34", "id": "foo"'	
+			render new TimerResponse()
 		}
     }
 }
