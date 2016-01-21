@@ -1,5 +1,0 @@
-package waitCostTracker
-
-class TimerResponse {
-
-}

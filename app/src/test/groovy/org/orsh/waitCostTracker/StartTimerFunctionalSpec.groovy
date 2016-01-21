@@ -7,7 +7,6 @@ import ratpack.handling.internal.DefaultContext;
 import ratpack.test.http.TestHttpClient
 import ratpack.test.ServerBackedApplicationUnderTest
 import spock.lang.Specification
-import waitCostTracker.TimerResponse;
 
 import static ratpack.jackson.Jackson.json;
 
@@ -41,17 +40,6 @@ class StartTimerFunctionalSpec extends Specification {
 	  then:
 	  response.body.text =~ '"id": ".+"'
   }
-  
-  def "should respond with a response"() {
-	  
-	  when:
-	  TimerResponse expected = new TimerResponse()
-	  def expectedJson = DefaultContext.current().render(json(expected))
-	  
-	  then:
-	  assert expectedJson == "foo"
-  }
-
 
   def cleanup() {
 	aut.stop()
