@@ -13,7 +13,7 @@ ratpack {
 			render groovyTemplate("index.html")
 		}
 		get("timer/start") {
-			render '"time": "34", "id": "foo"'
+			render '{"time": "34", "id": "foo"}'	
 		}
     }
 }

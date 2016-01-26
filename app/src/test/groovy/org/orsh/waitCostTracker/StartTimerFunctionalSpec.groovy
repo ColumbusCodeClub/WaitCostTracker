@@ -9,6 +9,8 @@ import ratpack.handling.internal.DefaultContext;
 import ratpack.test.http.TestHttpClient
 import ratpack.test.ServerBackedApplicationUnderTest
 import spock.lang.Specification
+import waitCostTracker.TimerResponse;
+import groovy.json.JsonSlurper;
 
 import static ratpack.jackson.Jackson.json;
 
@@ -43,6 +45,38 @@ class StartTimerFunctionalSpec extends Specification {
 	  response.body.text =~ '"id": ".+"'
   }
   
+  def "should respond with a response"() {
+	  
+	  given:
+	  ObjectMapper objectMapper = new ObjectMapper();
+	 
+	  when:
+	  get("/timer/start")
+	  def response = objectMapper.readValue(response.body.text, TimerResponse.class)
+	  
+	  then:
+	  assert response.id != null
+	  assert response.time != null
+  }
+  
+  def "should respond with a json response"() {
+	  
+	  given:
+	  ObjectMapper objectMapper = new ObjectMapper();
+	 
+	  when:
+	  get("/timer/start")
+	  def jsonSlurper = new JsonSlurper()
+	  def object = jsonSlurper.parseText(response.body.text)
+	  def timerResponse = new TimerResponse()
+	  timerResponse.id = object.id
+	  timerResponse.time = object.time.toInteger()
+	  
+	  then:
+	  assert timerResponse.id == "foo"
+	  assert timerResponse.time == 34
+  }
+
   def cleanup() {
 	aut.stop()
   }
