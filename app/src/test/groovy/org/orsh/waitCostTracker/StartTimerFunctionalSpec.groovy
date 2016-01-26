@@ -77,7 +77,6 @@ class StartTimerFunctionalSpec extends Specification {
 	  assert timerResponse.time == 34
   }
 
-
   def cleanup() {
 	aut.stop()
   }
