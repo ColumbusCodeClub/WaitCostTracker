@@ -1,68 +1,62 @@
 package org.orsh.waitCostTracker
 
-import org.junit.Test
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import static ratpack.jackson.Jackson.json
+import groovy.json.JsonParser;
+import groovy.json.JsonSlurper
+import groovy.transform.Immutable;
+import groovy.json.JsonOutput;
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
 import ratpack.handling.internal.DefaultContext;
 import ratpack.test.http.TestHttpClient
 import ratpack.test.ServerBackedApplicationUnderTest
 import spock.lang.Specification
-import waitCostTracker.TimerResponse;
+import spock.lang.Unroll;
 
-import static ratpack.jackson.Jackson.json;
+import java.beans.Transient
+import java.util.Date;;
 
 
 class StartTimerFunctionalSpec extends Specification {
 
-  ServerBackedApplicationUnderTest aut = new GroovyRatpackMainApplicationUnderTest()
-  @Delegate
-  TestHttpClient client = TestHttpClient.testHttpClient(aut)
+	ServerBackedApplicationUnderTest aut = new GroovyRatpackMainApplicationUnderTest()
+	@Delegate
+	TestHttpClient client = TestHttpClient.testHttpClient(aut)
 
-  def "Start timer should be ok"() {
-	when:
-	get("/timer/start")
-	
-	then:
-	response.statusCode == 200
-  }
-  
-  def "start time should respond with current milliseconds"() {
-	  when:
-	  get("/timer/start")
-	  
-	  then:
-	  response.body.text =~ '"time": "\\d{2,}"'
-  }
+	def slurper = new JsonSlurper()
 
-  def "start time should respond with timer id"() {
-	  when:
-	  get("/timer/start")
-	  
-	  then:
-	  response.body.text =~ '"id": ".+"'
-  }
-  
-  def "should respond with a response"() {
-	  
-	  given:
-	  // TODO this is expensive -- we may want to create a global ObjectMapper somewhere
-	  ObjectMapper objectMapper = new ObjectMapper();
-	  objectMapper.findAndRegisterModules();
-	 
-	  when:
-	  get("/timer/start")
-	  def response = objectMapper.readValue(response.body.text, TimerResponse.class)
-	  
-	  then:
-	  assert response.id != null
-	  assert response.time != null
-  }
+	def "Start timer should be ok"() {
+		
+		when:
+		get("/timer/start")
+
+		then:
+		response.statusCode == 200
+	}
+
+	def "timer should have id"() {
+
+		when:
+		get("/timer/start")
+
+		then:
+		assert slurpResponse().id != null
+	}
+
+	def slurpResponse() {
+		slurper.parseText(response.body.text)
+	}
 
 
-  def cleanup() {
-	aut.stop()
-  }
+	def "timer should have start time"() {
 
+		when:
+		get("/timer/start")
+
+		then:
+		assert slurpResponse().startTime != null
+	}
+
+	def cleanup() {
+		aut.stop()
+	}
 }

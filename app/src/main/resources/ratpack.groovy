@@ -1,10 +1,13 @@
 import static ratpack.groovy.Groovy.ratpack
-import waitCostTracker.TimerResponse
+import static ratpack.jackson.Jackson.json;
+
+import org.orsh.waitCostTracker.Timer
+
 
 ratpack {
     handlers {
 		get("timer/start") {
-			render new TimerResponse()
+			render json(new Timer())
 		}
     }
 }
