@@ -1,7 +1,7 @@
 import ratpack.groovy.template.TextTemplateModule
 
 import static ratpack.groovy.Groovy.ratpack
-import static ratpack.jackson.Jackson.json;
+import static ratpack.jackson.Jackson.json
 import static ratpack.groovy.Groovy.groovyTemplate
 
 import org.orsh.waitCostTracker.Timer
