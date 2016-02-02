@@ -14,5 +14,6 @@ ratpack {
 		get("timer/start") {
 			render json(new Timer())
 		}
-	}
+		fileSystem "assets", { f -> f.files() }
+    }
 }
