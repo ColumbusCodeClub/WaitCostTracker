@@ -21,7 +21,7 @@ class CalculateCostsFunctionalSpec extends Specification {
 	@Delegate
 	TestHttpClient client = TestHttpClient.testHttpClient(aut)
 	
-	def "should throw an exception if invalid date object passed"() {
+	def "should parse a date from json"() {
 		given:
 		
 		when:
@@ -30,8 +30,35 @@ class CalculateCostsFunctionalSpec extends Specification {
 		def object = jsonSlurper.parseText(response.body.text)
 		
 		then:
-		thrown(RuntimeException)
-		(Date.parse("MM/dd/yyyy H:m:s", object.startdate)) >> { throw new RuntimeException() }
+		Date.parse("MM/dd/yyyy HH:mm:ss", object.startdate) instanceof Date
+	}
+	
+	def "should calculate 120 minutes between 2 dates that differ by two hours"() {
+		given:
+		
+		when:
+		get("/calculate/costs")
+		def jsonSlurper = new JsonSlurper()
+		def object = jsonSlurper.parseText(response.body.text)
+		def dateDiff = Date.parse("MM/dd/yyyy HH:mm:ss", object.stopdate).time - Date.parse("MM/dd/yyyy HH:mm:ss", object.startdate).time
+		
+		then:
+		dateDiff / (60 * 1000) == 120
+	}
+	
+	def "should calculate 100 dollars as the cost for the 2 dates that differ by 2 hours"() {
+		given:
+		
+		when:
+		get("/calculate/costs")
+		def jsonSlurper = new JsonSlurper()
+		def object = jsonSlurper.parseText(response.body.text)
+		def dateDiff = Date.parse("MM/dd/yyyy HH:mm:ss", object.stopdate).time - Date.parse("MM/dd/yyyy HH:mm:ss", object.startdate).time
+		def totalHours = dateDiff / (60 * 60* 1000)
+		def rate = object.rate.toFloat()
+		
+		then:
+		(rate * totalHours).round(2) == 100.00
 	}
 	
 	def cleanup() {

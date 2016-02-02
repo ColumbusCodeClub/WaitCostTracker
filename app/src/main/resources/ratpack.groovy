@@ -16,7 +16,7 @@ ratpack {
 			render '{"time": "34", "id": "foo"}'	
 		}
 		get("calculate/costs") {
-			render '{"startdate": "2/20/2015 10:00:25am", "rate": "51.74"}'
+			render '{"startdate": "2/20/2015 10:00:25", "stopdate": "2/20/2015 12:00:25", "rate": "50.00"}'
 		}
     }
 }
