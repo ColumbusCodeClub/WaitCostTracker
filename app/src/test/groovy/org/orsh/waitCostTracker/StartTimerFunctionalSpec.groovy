@@ -33,10 +33,10 @@ class StartTimerFunctionalSpec extends Specification {
 		get("/timer/start")
 
 		then:
-		assert slurpResponse().id != null
+		assert responseAsTimer().id != null
 	}
 
-	def slurpResponse() {
+	def responseAsTimer() {
 		slurper.parseText(response.body.text)
 	}
 
@@ -47,7 +47,7 @@ class StartTimerFunctionalSpec extends Specification {
 		get("/timer/start")
 
 		then:
-		assert slurpResponse().startTime != null
+		assert responseAsTimer().startTime != null
 	}
 
 	def cleanup() {
