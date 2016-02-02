@@ -1,19 +1,11 @@
 package org.orsh.waitCostTracker
 
 import static ratpack.jackson.Jackson.json
-import groovy.json.JsonParser;
 import groovy.json.JsonSlurper
-import groovy.transform.Immutable;
-import groovy.json.JsonOutput;
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
-import ratpack.handling.internal.DefaultContext;
-import ratpack.test.http.TestHttpClient
 import ratpack.test.ServerBackedApplicationUnderTest
+import ratpack.test.http.TestHttpClient
 import spock.lang.Specification
-import spock.lang.Unroll;
-
-import java.beans.Transient
-import java.util.Date;;
 
 
 class StartTimerFunctionalSpec extends Specification {
@@ -25,7 +17,7 @@ class StartTimerFunctionalSpec extends Specification {
 	def slurper = new JsonSlurper()
 
 	def "Start timer should be ok"() {
-		
+
 		when:
 		get("/timer/start")
 
