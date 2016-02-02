@@ -1,10 +1,11 @@
 package org.orsh.waitCostTracker;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import groovy.transform.Immutable;
 
 @Immutable
 class Time {
-	  Date timestamp = new Date();
+	//TODO convert to use JDK 8 dates
+	Date timestamp = new Date();
 }
