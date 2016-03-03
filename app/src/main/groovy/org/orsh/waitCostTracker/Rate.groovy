@@ -1,9 +1,11 @@
 package org.orsh.waitCostTracker
 
-class Rate {
+import groovy.transform.Immutable
+
+@Immutable class Rate {
 	int hourly
-	
-	def value() {
-		hourly
+
+	def times(multiplier) {
+		hourly * multiplier.value
 	}
 }
