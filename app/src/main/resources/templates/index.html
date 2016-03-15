@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>Hello</title>
-	  <link rel="stylesheet" type="text/css" href="/stylesheets/test.css"/>   
-   </head>
-   <body>
-      <h1>Hey look it friggin works!</h1>
-      <script src="/scripts/test.js" type="text/javascript"></script>
-   </body>
+  <head>
+     <title>Wait Cost Tracker</title>
+      <link rel="stylesheet" type="text/css" href="/stylesheets/test.css"/>   
+  </head>
+  <body>
+     <h1><center>Wait Cost Tracker</center></h1>
+     <center><button type="button" onclick="Timer.toggleTimer()">Click Me!</button></center>
+     <div id="timer">
+     	<span id="timer">15:00:12 time waiting </span>
+     	<span id="cost">at 100.00 per hr</span>
+   	</div>
+    <div id="totalCostOfWaiting">1,000,000.00</div>
+    <script src="/scripts/test.js" type="text/javascript"></script>
+  </body>
 </html>
