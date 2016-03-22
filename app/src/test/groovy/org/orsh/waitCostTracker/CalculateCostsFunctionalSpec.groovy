@@ -20,6 +20,11 @@ class CalculateCostsFunctionalSpec extends Specification {
 	ServerBackedApplicationUnderTest aut = new GroovyRatpackMainApplicationUnderTest()
 	@Delegate
 	TestHttpClient client = TestHttpClient.testHttpClient(aut)
+	float RATE = ratePerMin(50)
+	
+	def ratePerMin(ratePerHour) {
+		return ratePerHour / 60
+	}
 	
 	def "should parse a date from json"() {
 		given:
@@ -60,6 +65,33 @@ class CalculateCostsFunctionalSpec extends Specification {
 		then:
 		(rate * totalHours).round(2) == 100.00
 	}
+	
+	def "should calculate 100 dollars as the cost for a duration of 120 minutes"() {
+		given:
+		
+		when:
+		get("/calculate/costByDuration")
+		def jsonSlurper = new JsonSlurper()
+		def object = jsonSlurper.parseText(response.body.text)
+		def totalHours = object.duration.toFloat()
+		
+		then:
+		(RATE * totalHours).round(2) == 100.00
+	}
+	
+	def "should calculate 0 dollars as the cost for a duration of 0 minutes"() {
+		given:
+		
+		when:
+		get("/calculate/costByDuration")
+		def jsonSlurper = new JsonSlurper()
+		def object = jsonSlurper.parseText(response.body.text)
+		def totalHours = object.duration.toFloat()
+		
+		then:
+		(RATE * totalHours).round(2) == 0.00
+	}
+
 	
 	def cleanup() {
 		aut.stop()
