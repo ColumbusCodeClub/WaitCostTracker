@@ -114,6 +114,16 @@ class CalculateCostsFunctionalSpec extends Specification {
 		then:
 		(RATE * duration).round(2) == 0.00
 	}
+	
+	def "should return 500 error if past max duration of 1441 minutes" () {
+		given:
+			
+		when:
+			get("/calculate/costByDuration/" + 1441)
+		
+		then:
+			500 == response.getStatusCode()
+	}
 
 	private float getDuration(minutes) {
 		get("/calculate/costByDuration/" + minutes)

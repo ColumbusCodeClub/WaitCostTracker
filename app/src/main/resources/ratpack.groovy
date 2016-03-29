@@ -22,7 +22,11 @@ ratpack {
 		}
 		get("calculate/costByDuration/:time") {
 			time =   context.pathTokens['time'].isInteger() ? context.pathTokens['time'] : "0";
-			render '{"duration": "' + time + '"}'
+			if (time.toInteger() > 1440) {
+				context.getResponse().status(500).send("Oops!  Something has gone afoul!")
+			} else {
+				render '{"duration": "' + time + '"}'
+			}
 		}
 		get("calculate/costByDuration/") {
 			render '{"duration": "0"}'
