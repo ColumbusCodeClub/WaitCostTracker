@@ -21,16 +21,20 @@ ratpack {
 			render '{"startdate": "2/20/2015 10:00:25", "stopdate": "2/20/2015 12:00:25", "rate": "50.00"}'
 		}
 		get("calculate/costByDuration/:time") {
-			time =   context.pathTokens['time'].isInteger() ? context.pathTokens['time'] : "0";
-			if (time.toInteger() > 1440) {
-				context.getResponse().status(500).send("Oops!  Something has gone afoul!")
-			} else {
-				render '{"duration": "' + time + '"}'
-			}
+			def time = context.pathTokens['time'].isInteger() ? context.pathTokens['time'] : "0";
+			def isBeyondTwentyFourHours = time.toInteger() > 1440
+			if (isBeyondTwentyFourHours) {
+				raiseTimeLimitError(context)
+			} 
+			render '{"duration": "' + time + '"}'
 		}
 		get("calculate/costByDuration/") {
 			render '{"duration": "0"}'
 		}
 		fileSystem "assets", { f -> f.files() }
     }
+}
+
+private raiseTimeLimitError(context) {
+	context.getResponse().status(500).send("Oops!  Something has gone afoul!")
 }
