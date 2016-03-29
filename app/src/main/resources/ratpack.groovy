@@ -20,8 +20,8 @@ ratpack {
 		get("calculate/costs") {
 			render '{"startdate": "2/20/2015 10:00:25", "stopdate": "2/20/2015 12:00:25", "rate": "50.00"}'
 		}
-		get("calculate/costByDuration") {
-			render '{"duration": "120"}'
+		get("calculate/costByDuration/:time") {
+			render '{"duration": "' + context.pathTokens['time'] + '"}'
 		}
 		fileSystem "assets", { f -> f.files() }
     }
