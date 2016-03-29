@@ -21,13 +21,13 @@ ratpack {
 			render '{"startdate": "2/20/2015 10:00:25", "stopdate": "2/20/2015 12:00:25", "rate": "50.00"}'
 		}
 		get("calculate/costByDuration/:time") {
-			def thing = context.pathTokens['time']
-			def isBeyondTwentyFourHours = !thing.isInteger() || thing.toInteger() > 1440
+			def time = context.pathTokens['time']
+			def isBeyondTwentyFourHours = !time.isInteger() || time.toInteger() > 1440
 			if (isBeyondTwentyFourHours) {
 				raiseTimeLimitError(context)
-			} 
-			
-			render '{"duration": "' + thing + '"}'
+			} else {
+				render '{"duration": "' + time + '"}'
+			}
 		}
 		get("calculate/costByDuration/") {
 			raiseTimeLimitError(context)
