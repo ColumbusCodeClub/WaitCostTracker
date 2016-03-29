@@ -95,34 +95,34 @@ class CalculateCostsFunctionalSpec extends Specification {
 		(RATE * duration).round(2) == 400.00
 	}
 	
-	def "should calculate 0 dollars for a duration of foo minutes" () {
+	def "should return 400 error for a duration of foo minutes" () {
 		given:
 		
 		when:
-		def duration = getDuration("foo");
+		get("/calculate/costByDuration/" + "foo")
 
 		then:
-		(RATE * duration).round(2) == 0.00
+		400 == response.getStatusCode()
 	}
 	
-	def "should calculate 0 dollars for a duration of no value minutes" () {
+	def "should return 400 error for a duration of no value minutes" () {
 		given:
 		
 		when:
-	    def duration = getDuration(null);
+	    get("/calculate/costByDuration/")
 
 		then:
-		(RATE * duration).round(2) == 0.00
+		400 == response.getStatusCode()
 	}
 	
-	def "should return 500 error if past max duration of 1441 minutes" () {
+	def "should return 400 error if past max duration of 1441 minutes" () {
 		given:
 			
 		when:
 			get("/calculate/costByDuration/" + 1441)
 		
 		then:
-			500 == response.getStatusCode()
+			400 == response.getStatusCode()
 	}
 
 	private float getDuration(minutes) {
