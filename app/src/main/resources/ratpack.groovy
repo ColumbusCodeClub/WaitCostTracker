@@ -21,7 +21,11 @@ ratpack {
 			render '{"startdate": "2/20/2015 10:00:25", "stopdate": "2/20/2015 12:00:25", "rate": "50.00"}'
 		}
 		get("calculate/costByDuration/:time") {
-			render '{"duration": "' + context.pathTokens['time'] + '"}'
+			time =   context.pathTokens['time'].isInteger() ? context.pathTokens['time'] : "0";
+			render '{"duration": "' + time + '"}'
+		}
+		get("calculate/costByDuration/") {
+			render '{"duration": "0"}'
 		}
 		fileSystem "assets", { f -> f.files() }
     }

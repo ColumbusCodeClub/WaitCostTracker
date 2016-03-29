@@ -104,6 +104,32 @@ class CalculateCostsFunctionalSpec extends Specification {
 		then:
 		(RATE * totalHours).round(2) == 400.00
 	}
+	
+	def "should calculate 0 dollars for a duration of foo minutes" () {
+		given:
+		
+		when:
+		get("/calculate/costByDuration/foo")
+		def jsonSlurper = new JsonSlurper()
+		def object = jsonSlurper.parseText(response.body.text)
+		def totalHours = object.duration.toFloat()
+		
+		then:
+		(RATE * totalHours).round(2) == 0.00
+	}
+	
+	def "should calculate 0 dollars for a duration of no value minutes" () {
+		given:
+		
+		when:
+		get("/calculate/costByDuration/")
+		def jsonSlurper = new JsonSlurper()
+		def object = jsonSlurper.parseText(response.body.text)
+		def totalHours = object.duration.toFloat()
+		
+		then:
+		(RATE * totalHours).round(2) == 0.00
+	}
 
 	
 	def cleanup() {
