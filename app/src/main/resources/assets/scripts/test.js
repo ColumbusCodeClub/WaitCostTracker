@@ -39,6 +39,8 @@ Timer = (function(){
 	}
 	
 	return {
-		toggleTimer: toggleTimer
+		toggleTimer: toggleTimer,
+		started: started
 	};
 })();
+module.exports = Timer;
