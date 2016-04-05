@@ -2,6 +2,9 @@ import ratpack.groovy.template.TextTemplateModule
 
 import static ratpack.groovy.Groovy.ratpack
 import static ratpack.jackson.Jackson.json
+
+import java.time.Duration;
+
 import static ratpack.groovy.Groovy.groovyTemplate
 
 import org.orsh.waitCostTracker.Timer
@@ -17,6 +20,22 @@ ratpack {
 		get("calculate/costs") {
 			render '{"startdate": "2/20/2015 10:00:25", "stopdate": "2/20/2015 12:00:25", "rate": "50.00"}'
 		}
+		get("calculate/costByDuration/:time") {
+			def time = context.pathTokens['time']
+			def isBeyondTwentyFourHours = !time.isInteger() || time.toInteger() > 1440
+			if (isBeyondTwentyFourHours) {
+				raiseTimeLimitError(context)
+			} else {
+				render '{"duration": "' + time + '"}'
+			}
+		}
+		get("calculate/costByDuration/") {
+			raiseTimeLimitError(context)
+		}
 		fileSystem "assets", { f -> f.files() }
     }
+}
+
+private raiseTimeLimitError(context) {
+	context.getResponse().status(400).send("Oops!  Something has gone afoul!")
 }
