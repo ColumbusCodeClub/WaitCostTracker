@@ -5,7 +5,7 @@ Timer = function(){
 	function toggleTimer() {
 		started = !started
 		if(!started) {
-			$.ajax();
+			$.ajax({url: "calculate/costByDuration/100"});
 		}
 		console.log("Timer status: " + started);
 	}

@@ -31,4 +31,10 @@ describe("timer", function () {
     	timerUnderTest.toggleTimer();
     	expect($.ajax).not.toHaveBeenCalled();
     });
+    
+    it("should call costByDuration url", function() {
+    	timerUnderTest.toggleTimer();
+    	timerUnderTest.toggleTimer();
+    	expect($.ajax).toHaveBeenCalledWith(jasmine.objectContaining({url:"calculate/costByDuration/100"}))
+    });
 });

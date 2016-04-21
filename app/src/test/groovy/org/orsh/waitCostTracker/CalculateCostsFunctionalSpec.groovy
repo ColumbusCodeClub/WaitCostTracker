@@ -124,6 +124,17 @@ class CalculateCostsFunctionalSpec extends Specification {
 		then:
 			400 == response.getStatusCode()
 	}
+	
+	def "should return cost for hourly rate of 50" () {
+		given:
+		
+		when:
+			get("/calculate/costByDuration/" + 60)
+			
+		then:
+			def object = jsonSlurper.parseText(response.body.text)
+			object.cost == '50'
+	}
 
 	private float getDuration(minutes) {
 		get("/calculate/costByDuration/" + minutes)

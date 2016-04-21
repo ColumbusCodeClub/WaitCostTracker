@@ -7,6 +7,7 @@ import java.time.Duration;
 
 import static ratpack.groovy.Groovy.groovyTemplate
 
+import org.orsh.waitCostTracker.Rate
 import org.orsh.waitCostTracker.Timer
 
 
@@ -26,7 +27,8 @@ ratpack {
 			if (isBeyondTwentyFourHours) {
 				raiseTimeLimitError(context)
 			} else {
-				render '{"duration": "' + time + '"}'
+			    def rate = new Rate(hourly:50)
+				render '{"duration": "' + time + '","cost": "' + rate.times(1) + '"}'
 			}
 		}
 		get("calculate/costByDuration/") {
