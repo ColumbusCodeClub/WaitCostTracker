@@ -1,9 +1,12 @@
-Timer = (function(){
+Timer = function(){
 	
 	var started = false;
 	
 	function toggleTimer() {
-		started = !started	
+		started = !started
+		if(!started) {
+			$.ajax(); 
+		}
 		console.log("Timer status: " + started);
 	}
 	
@@ -15,6 +18,6 @@ Timer = (function(){
 		toggleTimer: toggleTimer,
 		isStarted: isStarted
 	};
-})();
+};
 module.exports = Timer;
 
