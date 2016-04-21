@@ -1,4 +1,4 @@
-var timer = require('../../../../src/main/resources/assets/scripts/test.js')
+var timer = require('../../../../src/main/resources/assets/scripts/timer.js')
 $ = {
 	'ajax': function() {}
 };

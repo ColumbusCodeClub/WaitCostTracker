@@ -5,7 +5,7 @@ Timer = function(){
 	function toggleTimer() {
 		started = !started
 		if(!started) {
-			$.ajax(); 
+			$.ajax();
 		}
 		console.log("Timer status: " + started);
 	}
