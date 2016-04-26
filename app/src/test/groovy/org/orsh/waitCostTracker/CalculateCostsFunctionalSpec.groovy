@@ -1,6 +1,8 @@
 package org.orsh.waitCostTracker
 
 import static ratpack.jackson.Jackson.json
+import static org.orsh.waitCostTracker.Rate.DEFAULT_RATE
+
 import groovy.json.JsonSlurper
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
 import ratpack.test.ServerBackedApplicationUnderTest
@@ -15,10 +17,6 @@ class CalculateCostsFunctionalSpec extends Specification {
 	TestHttpClient client = TestHttpClient.testHttpClient(aut)
 	float RATE = ratePerMin(50)
 	def jsonSlurper = new JsonSlurper()
-	
-	def ratePerMin(ratePerHour) {
-		return ratePerHour / 60
-	}
 	
 	def "should parse a date from json"() {
 		given:
@@ -108,35 +106,51 @@ class CalculateCostsFunctionalSpec extends Specification {
 		400 == response.getStatusCode()
 	}
 	
-	def "should return 400 error if past max duration of 1441 minutes" () {
+	def "should return 400 error if past max duration of 24 hours" () {
 		given:
 			
 		when:
-			get("/calculate/costByDuration/" + 1441)
+			get("/calculate/costByDuration/" + (minutesFor(24) + 1))
 		
 		then:
 			400 == response.getStatusCode()
 	}
 	
 	def "should return cost for hourly rate of 50" () {
+		given:
+			def hours = 1
 		when:
-			get("/calculate/costByDuration/" + 60)
+			get("/calculate/costByDuration/" + minutesFor(hours))
 			
 		then:
 			def object = jsonSlurper.parseText(response.body.text)
-			object.cost == '50'
+			object.cost == "${costAtDefaultRateFor(hours)}"
 	}
 	
 	def "should return cost of 100 for 120 minutes" () {
+		given:
+			def hours = 2
 		when:
-			get("/calculate/costByDuration/" + 120)
+			get("/calculate/costByDuration/" + minutesFor(hours))
 			
 		then:
 			def object = jsonSlurper.parseText(response.body.text)
-			object.cost == '100'
+			object.cost == "${costAtDefaultRateFor(hours)}"
 		
 	}
 
+	def ratePerMin(ratePerHour) {
+		return ratePerHour / 60
+	}
+	
+	def costAtDefaultRateFor(hours) {
+		DEFAULT_RATE.hourly * hours
+	}
+	
+	def minutesFor(hours) {
+		hours * 60
+	}
+	
 	private float getDuration(minutes) {
 		get("/calculate/costByDuration/" + minutes)
 		def object = jsonSlurper.parseText(response.body.text)
