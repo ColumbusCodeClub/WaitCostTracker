@@ -1,18 +1,11 @@
 package org.orsh.waitCostTracker
 
-import org.junit.Test
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import static ratpack.jackson.Jackson.json
+import groovy.json.JsonSlurper
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
-import ratpack.handling.internal.DefaultContext;
-import ratpack.test.http.TestHttpClient
 import ratpack.test.ServerBackedApplicationUnderTest
+import ratpack.test.http.TestHttpClient
 import spock.lang.Specification
-import waitCostTracker.TimerResponse;
-import groovy.json.JsonSlurper;
-
-import static ratpack.jackson.Jackson.json;
 
 
 class CalculateCostsFunctionalSpec extends Specification {
@@ -126,14 +119,22 @@ class CalculateCostsFunctionalSpec extends Specification {
 	}
 	
 	def "should return cost for hourly rate of 50" () {
-		given:
-		
 		when:
 			get("/calculate/costByDuration/" + 60)
 			
 		then:
 			def object = jsonSlurper.parseText(response.body.text)
 			object.cost == '50'
+	}
+	
+	def "should return cost of 100 for 120 minutes" () {
+		when:
+			get("/calculate/costByDuration/" + 120)
+			
+		then:
+			def object = jsonSlurper.parseText(response.body.text)
+			object.cost == '100'
+		
 	}
 
 	private float getDuration(minutes) {

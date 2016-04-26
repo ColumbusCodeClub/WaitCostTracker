@@ -6,7 +6,7 @@ import groovy.transform.Immutable
 	int hourly
 
 	def times(multiplier) {
-		System.out.println("HEY YOU CALLED ME!!!")
+		System.out.println(hourly * multiplier.value)
 		hourly * multiplier.value
 	}
 }
