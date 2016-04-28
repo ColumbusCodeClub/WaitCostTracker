@@ -10,18 +10,18 @@ describe("timer", function () {
 	beforeEach(function() {
 		timerUnderTest = new timer();
 		spyOn($, 'ajax');
-		spyOn(global, 'moment');
+		spyOn(global, 'moment').and.returnValue(5);
 	});
 	
     it("starts the timer", function () {
-    		timerUnderTest.toggleTimer();
-        expect(timerUnderTest.isStarted()).toEqual(true);
+    	timerUnderTest.toggleTimer();
+        expect(timerUnderTest.isRunning()).toEqual(true);
     });
     
     it("stops the timer", function () {
     		timerUnderTest.toggleTimer();
     		timerUnderTest.toggleTimer();
-        expect(timerUnderTest.isStarted()).toEqual(false);
+        expect(timerUnderTest.isRunning()).toEqual(false);
     });
     
     it("should send timer data on timer stop", function() {
@@ -35,14 +35,26 @@ describe("timer", function () {
     		expect($.ajax).not.toHaveBeenCalled();
     });
     
-    it("should call costByDuration url", function() {
-    		timerUnderTest.toggleTimer();
-    		timerUnderTest.toggleTimer();
-    		expect($.ajax).toHaveBeenCalledWith(jasmine.objectContaining({url:"calculate/costByDuration/100"}))
-    });
-    
     it("should call moment on first button press", function() {
     		timerUnderTest.toggleTimer();
     		expect(global.moment).toHaveBeenCalled();
     });
+
+    it("should call moment on both button presses", function() {
+    	timerUnderTest.toggleTimer();
+    	timerUnderTest.toggleTimer();
+    	expect(global.moment).toHaveBeenCalledTimes(2);
+    });
+    
+    it("should call costByDuration url", function() {
+    	moment = function() { return minutesToMs(5); };
+		timerUnderTest.toggleTimer();
+		moment = function() { return minutesToMs(15); }; 
+		timerUnderTest.toggleTimer();
+		expect($.ajax).toHaveBeenCalledWith(jasmine.objectContaining({url:"calculate/costByDuration/10"}))
+    });
+    
+    function minutesToMs(minutes) {
+    	return minutes * 1000 * 60;
+    }
 });
