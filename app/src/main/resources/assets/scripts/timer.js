@@ -30,7 +30,7 @@ Timer = function(){
 	}
 	
 	function msToMinutes(ms) {
-		return ms/1000/60;
+		return Math.ceil(ms/1000/60);
 	}
 	
 	function resetTimer() {

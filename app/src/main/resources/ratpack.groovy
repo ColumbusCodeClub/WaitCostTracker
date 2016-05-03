@@ -36,6 +36,7 @@ ratpack {
 		get("calculate/costByDuration/") {
 			raiseTimeLimitError(context)
 		}
+
 		fileSystem "assets", { f -> f.files() }
     }
 }

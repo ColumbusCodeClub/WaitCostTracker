@@ -54,6 +54,14 @@ describe("timer", function () {
 		expect($.ajax).toHaveBeenCalledWith(jasmine.objectContaining({url:"calculate/costByDuration/10"}))
     });
     
+    it("should round", function() {
+    	moment = function() { return minutesToMs(15); };
+    	timerUnderTest.toggleTimer();
+    	moment = function() { return minutesToMs(15.01); }; 
+    	timerUnderTest.toggleTimer();
+    	expect($.ajax).toHaveBeenCalledWith(jasmine.objectContaining({url:"calculate/costByDuration/1"}))
+    });
+    
     function minutesToMs(minutes) {
     	return minutes * 1000 * 60;
     }
