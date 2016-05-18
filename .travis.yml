@@ -1,1 +1,5 @@
 language: groovy
+
+cache:
+  directories:
+    - $HOME/app/.gradle/
