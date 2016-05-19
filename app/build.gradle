@@ -28,7 +28,8 @@ repositories { jcenter()
 
 dependencies {
 	compile 'io.ratpack:ratpack-groovy:1.1.1',
-			'org.slf4j:slf4j-simple:1.7.12'
+			'org.slf4j:slf4j-simple:1.7.12',
+			'cglib:cglib:2.2.2'
 			// TODO For JDK 8 dates, will need later
 			// 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.6.1'
 	testCompile 'org.hamcrest:hamcrest-all:1.3',
