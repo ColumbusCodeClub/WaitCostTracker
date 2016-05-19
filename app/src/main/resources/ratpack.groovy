@@ -7,13 +7,14 @@ import java.time.Duration;
 
 import static ratpack.groovy.Groovy.groovyTemplate
 
-import static org.orsh.waitCostTracker.Rate.DEFAULT_RATE
-
+import org.orsh.waitCostTracker.PersistenceHandler
+import org.orsh.waitCostTracker.ResponseHandler;
 import org.orsh.waitCostTracker.Rate
 import org.orsh.waitCostTracker.Timer
 
 
 ratpack {
+	PersistenceHandler persister = new PersistenceHandler()
 	bindings { module TextTemplateModule }
 	handlers {
 		get { render groovyTemplate("index.html") }
@@ -25,17 +26,19 @@ ratpack {
 		}
 		get("calculate/costByDuration/:time") {
 			def minutes = context.pathTokens['time']
-			def isBeyondTwentyFourHours = !minutes.isInteger() || minutes.toInteger() > 1440
-			if (isBeyondTwentyFourHours) {
+			
+			ResponseHandler responseHandler = new ResponseHandler(persister)
+			def response = responseHandler.getResponse(minutes)
+			if(response == "raiseTimeLimitError") {
 				raiseTimeLimitError(context)
 			} else {
-				def hours = [ value: minutes.toInteger()/60 ]
-				render '{"duration": "' + minutes + '","cost": "' + DEFAULT_RATE.times(hours) + '"}'
+				render response
 			}
 		}
 		get("calculate/costByDuration/") {
 			raiseTimeLimitError(context)
 		}
+
 		fileSystem "assets", { f -> f.files() }
     }
 }
@@ -43,3 +46,4 @@ ratpack {
 private raiseTimeLimitError(context) {
 	context.getResponse().status(400).send("Oops!  Something has gone afoul!")
 }
+
