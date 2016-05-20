@@ -15,7 +15,7 @@ public class CharliePersisterSpec extends Specification {
 
 		then:
 		file.exists() == true
-//		file.delete()
+		file.delete()
 	}
 
 }
