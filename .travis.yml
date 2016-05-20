@@ -1,4 +1,4 @@
 language: groovy
 
 script:
-   - ../app/gradlew build
+   - ./app/gradlew build
