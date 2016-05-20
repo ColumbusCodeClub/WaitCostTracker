@@ -2,14 +2,11 @@ package org.orsh.waitCostTracker
 
 class PersistenceHandler {
 	def folderPath
-	PersistenceHandler(folder) {
-		folderPath = folder
-	}
-	
+
 	PersistenceHandler() {
-		folderPath = "/Users/ra3p62b/Documents/workspaces/katas/WaitCostTracker/app/charlie"
+		folderPath = System.getProperty("user.dir").toString() + "/dataFile.json";
 	}
-	
+
 	def persist(toPersist){
 		File file = new File(folderPath)
 		file.createNewFile()
