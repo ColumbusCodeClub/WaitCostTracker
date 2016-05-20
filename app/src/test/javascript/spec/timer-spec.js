@@ -6,7 +6,8 @@ describe("timer", function () {
 	var timerUnderTest;
 	var mockWriter = {
 			writeCost: function(){},
-			writeTime: function(){}
+			writeTime: function(){},
+			writeTimeCostJson: function(){}
 	};
 	
 	beforeEach(function() {
@@ -18,6 +19,7 @@ describe("timer", function () {
 		spyOn(global, 'moment').and.returnValue(5);
 		spyOn(mockWriter, 'writeCost');
 		spyOn(mockWriter, 'writeTime');
+		spyOn(mockWriter, 'writeTimeCostJson');
 	});
 	
     it("starts the timer", function () {
@@ -53,16 +55,10 @@ describe("timer", function () {
     	expect(global.moment).toHaveBeenCalledTimes(2);
     });
 
-    it("should call writeCost on stop button presses", function() {
+    it("should call writeTimeCostJson on stop button presses", function() {
     	timerUnderTest.toggleTimer();
     	timerUnderTest.toggleTimer();
-    	expect(mockWriter.writeCost).toHaveBeenCalledTimes(1);
-    });
-    
-    it("should call writeTime on stop button presses", function() {
-    	timerUnderTest.toggleTimer();
-    	timerUnderTest.toggleTimer();
-    	expect(mockWriter.writeTime).toHaveBeenCalledTimes(1);
+    	expect(mockWriter.writeTimeCostJson).toHaveBeenCalledTimes(1);
     });
     
     it("should call costByDuration url", function() {
