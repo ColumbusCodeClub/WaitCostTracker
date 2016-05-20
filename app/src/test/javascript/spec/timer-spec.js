@@ -5,7 +5,8 @@ writeCost = function() {};
 describe("timer", function () {
 	var timerUnderTest;
 	var mockWriter = {
-			writeCost: function(){}
+			writeCost: function(){},
+			writeTime: function(){}
 	};
 	
 	beforeEach(function() {
@@ -16,6 +17,7 @@ describe("timer", function () {
 		spyOn($, 'ajax');
 		spyOn(global, 'moment').and.returnValue(5);
 		spyOn(mockWriter, 'writeCost');
+		spyOn(mockWriter, 'writeTime');
 	});
 	
     it("starts the timer", function () {
@@ -55,6 +57,12 @@ describe("timer", function () {
     	timerUnderTest.toggleTimer();
     	timerUnderTest.toggleTimer();
     	expect(mockWriter.writeCost).toHaveBeenCalledTimes(1);
+    });
+    
+    it("should call writeTime on stop button presses", function() {
+    	timerUnderTest.toggleTimer();
+    	timerUnderTest.toggleTimer();
+    	expect(mockWriter.writeTime).toHaveBeenCalledTimes(1);
     });
     
     it("should call costByDuration url", function() {

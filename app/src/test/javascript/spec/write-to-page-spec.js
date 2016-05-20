@@ -34,4 +34,10 @@ describe("writer", function () {
 		pageWriterUnderTest.writeTime('1 hour');
 		expect(jQueryMockObject.html).toHaveBeenCalledWith('1 hour');
 	});
+	
+	it("writes time and cost to the page", function() {
+		pageWriterUnderTest.writeTimeCostJson('{"duration":"00:05", "cost":"12.00"}');
+		expect(jQueryMockObject.html).toHaveBeenCalledWith("00:05");
+		expect(jQueryMockObject.html).toHaveBeenCalledWith("12.00");
+	})
 });

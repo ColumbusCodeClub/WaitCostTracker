@@ -19,6 +19,7 @@ Timer = function(writer){
 		endMs = moment();
 		$.ajax({url: "calculate/costByDuration/" + durationInMinutes() });
 		writer.writeCost('$100.00');
+		writer.writeTime('1 hour');
 	}
 	
 	function isRunning() {
