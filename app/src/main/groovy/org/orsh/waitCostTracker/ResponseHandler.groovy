@@ -16,7 +16,7 @@ class ResponseHandler {
 		} else {
 			def hours = [ value: minutes.toInteger()/60 ]
 			def response = '{"duration": "' + minutes + '","cost": "' + DEFAULT_RATE.times(hours) + '"}'
-			persister.persist("foo: brian")
+			persister.persist(response)
 			response
 		}
 	}

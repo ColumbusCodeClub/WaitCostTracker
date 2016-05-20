@@ -13,12 +13,11 @@ class RequestCallsPersisterSpec extends Specification {
 		setup:
 		PersistenceHandler mockCharliePersister = Mock()
 		ResponseHandler underTest = new ResponseHandler(mockCharliePersister)
-		//get("/calculate/costByDuration/120") >> { mockCharliePersister.persist(mockCharliePersister) }
-
+		def minutes = "1234"
 		when:
-		underTest.getResponse("1234")
+		underTest.getResponse(minutes)
 				
 		then:
-		1*mockCharliePersister.persist("foo: brian")
+		1*mockCharliePersister.persist('{"duration": "1234","cost": "1028.3333333350"}')
 	}
 }
