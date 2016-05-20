@@ -1,8 +1,7 @@
-Timer = function(){
+Timer = function(writer){
 	
 	var startMs;
 	var endMs;
-	
 	function toggleTimer() {
 		if(isRunning()) {
 			stopTimer();
@@ -19,6 +18,7 @@ Timer = function(){
 	function stopTimer() {
 		endMs = moment();
 		$.ajax({url: "calculate/costByDuration/" + durationInMinutes() });
+		writer.writeCost('$100.00');
 	}
 	
 	function isRunning() {
