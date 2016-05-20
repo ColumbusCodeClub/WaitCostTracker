@@ -1,16 +1,25 @@
 var timer = require('../../../../src/main/resources/assets/scripts/timer.js')
-$ = {
-	'ajax': function() {}
-};
-
-moment = function() {}
+moment = function() {};
+writeCost = function() {};
 
 describe("timer", function () {
 	var timerUnderTest;
+	var mockWriter = {
+			writeCost: function(){},
+			writeTime: function(){},
+			writeTimeCostJson: function(){}
+	};
+	
 	beforeEach(function() {
-		timerUnderTest = new timer();
+		$ = {
+			'ajax': function(){}
+		};
+		timerUnderTest = new timer(mockWriter);
 		spyOn($, 'ajax');
 		spyOn(global, 'moment').and.returnValue(5);
+		spyOn(mockWriter, 'writeCost');
+		spyOn(mockWriter, 'writeTime');
+		spyOn(mockWriter, 'writeTimeCostJson');
 	});
 	
     it("starts the timer", function () {
@@ -44,6 +53,12 @@ describe("timer", function () {
     	timerUnderTest.toggleTimer();
     	timerUnderTest.toggleTimer();
     	expect(global.moment).toHaveBeenCalledTimes(2);
+    });
+
+    it("should call writeTimeCostJson on stop button presses", function() {
+    	timerUnderTest.toggleTimer();
+    	timerUnderTest.toggleTimer();
+    	expect(mockWriter.writeTimeCostJson).toHaveBeenCalledTimes(1);
     });
     
     it("should call costByDuration url", function() {

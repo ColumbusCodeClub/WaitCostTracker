@@ -2,17 +2,22 @@
 <html>
   <head>
      <title>Wait Cost Tracker</title>
-      <link rel="stylesheet" type="text/css" href="/stylesheets/test.css"/>   
+      <!--  <link rel="stylesheet" type="text/css" href="/stylesheets/test.css"/> -->
+      <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> 
   </head>
   <body>
      <h1><center>Wait Cost Tracker</center></h1>
      <center><button type="button" onclick="timer.toggleTimer()">Click Me!</button></center>
      <div id="timer">
-     	<span id="timer">15:00:12 time waiting </span>
+     	<span id="time">15:00:12 time waiting </span>
      	<span id="cost">at 100.00 per hr</span>
    	</div>
     <script src="/scripts/timer.js" type="text/javascript"></script>
-    <script>timer = new Timer()</script>
+    <script src="/scripts/write-to-page.js" type="text/javascript"></script>
+    <script>timer = new Timer(new PageWriter())</script>
     <div id="totalCostOfWaiting">1,000,000.00</div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>

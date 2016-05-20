@@ -2,7 +2,7 @@ package org.orsh.waitCostTracker;
 
 import spock.lang.Specification;
 
-public class CharliePersisterSpec extends Specification {
+public class PersistenceHandlerSpec extends Specification {
 	def "should create a file and verify it exists"() {
 		given:
 		def toPersist = "foo"
