@@ -6,7 +6,6 @@ import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
 import ratpack.test.ServerBackedApplicationUnderTest
 import ratpack.test.http.TestHttpClient
 import spock.lang.Specification
-import waitCostTracker.TimerResponse;
 import groovy.json.JsonSlurper;
 
 
