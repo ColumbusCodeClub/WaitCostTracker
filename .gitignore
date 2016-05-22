@@ -1,27 +1,4 @@
-# build
-build/
-*.class
-
-# Steve Jobs
-.DS_Store
-
-#######################################
-# Eclipse
-#######################################
-bin/
-.settings/
-.classpath
-.project
-workspace/
-
-#######################################
-# IDEA
-#######################################
-.idea
-*.iml
-*.ipr
-*.iws
-classes/
-
-# gradle
-.gradle
+node_modules/jasmine-jquery/HISTORY.md
+node_modules/jasmine-jquery/LICENSE
+node_modules/jasmine-jquery/README.md
+dataFile.json
