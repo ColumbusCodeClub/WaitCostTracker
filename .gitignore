@@ -2,3 +2,9 @@ node_modules/jasmine-jquery/HISTORY.md
 node_modules/jasmine-jquery/LICENSE
 node_modules/jasmine-jquery/README.md
 dataFile.json
+.classpath
+.gradle/
+.project
+.settings/
+bin/
+build/

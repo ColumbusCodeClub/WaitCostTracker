@@ -15,7 +15,9 @@ describe("timer", function () {
 			'ajax': function(){}
 		};
 		timerUnderTest = new timer(mockWriter);
-		spyOn($, 'ajax');
+		spyOn($, 'ajax').and.callFake(function(e){
+			e.success({});
+		});
 		spyOn(global, 'moment').and.returnValue(5);
 		spyOn(mockWriter, 'writeCost');
 		spyOn(mockWriter, 'writeTime');
@@ -28,8 +30,8 @@ describe("timer", function () {
     });
     
     it("stops the timer", function () {
-    		timerUnderTest.toggleTimer();
-    		timerUnderTest.toggleTimer();
+		timerUnderTest.toggleTimer();
+		timerUnderTest.toggleTimer();
         expect(timerUnderTest.isRunning()).toEqual(false);
     });
     
