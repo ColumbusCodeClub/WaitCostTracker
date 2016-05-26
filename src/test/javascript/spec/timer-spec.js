@@ -82,4 +82,5 @@ describe("timer", function () {
     function minutesToMs(minutes) {
     	return minutes * 1000 * 60;
     }
+    
 });
