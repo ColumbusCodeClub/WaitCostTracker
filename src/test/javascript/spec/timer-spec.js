@@ -22,6 +22,7 @@ describe("timer", function () {
 		spyOn(mockWriter, 'writeCost');
 		spyOn(mockWriter, 'writeTime');
 		spyOn(mockWriter, 'writeTimeCostJson');
+		spyOn(buttonStyling, 'makeSayStop');
 	});
 	
     it("starts the timer", function () {
@@ -77,6 +78,11 @@ describe("timer", function () {
     	moment = function() { return minutesToMs(15.01); }; 
     	timerUnderTest.toggleTimer();
     	expect($.ajax).toHaveBeenCalledWith(jasmine.objectContaining({url:"calculate/costByDuration/1"}))
+    });
+    
+    it('should make button styled to stop on first toggle', function() {
+		timerUnderTest.toggleTimer();
+		expect(buttonStyling.makeSayStop).toHaveBeenCalled();
     });
     
     function minutesToMs(minutes) {

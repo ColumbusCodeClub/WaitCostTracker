@@ -13,6 +13,7 @@ Timer = function(writer){
 	
 	function startTimer() {
 		startMs = moment();
+		buttonStyling.makeSayStop();
 	}
 	
 	function stopTimer() {

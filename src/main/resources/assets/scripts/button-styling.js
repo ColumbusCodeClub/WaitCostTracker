@@ -1,5 +1,8 @@
 buttonStyling = {
-	makeStop: function() {
-		$('.timer-toggle-btn').html('Stop');
+	makeSayStop: function() {
+		var $timerButton = $('.timer-toggle-btn');
+		$timerButton.html('Stop');
+		$timerButton.addClass('btn-danger');
+		$timerButton.removeClass('btn-success');
 	}
 };
