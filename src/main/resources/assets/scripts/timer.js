@@ -24,6 +24,7 @@ Timer = function(writer){
 				writer.writeTimeCostJson(result);				
 			}
 		});
+		buttonStyling.makeSayStart();
 	}
 	
 	function isRunning() {

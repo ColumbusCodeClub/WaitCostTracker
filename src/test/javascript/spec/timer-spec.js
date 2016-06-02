@@ -23,6 +23,7 @@ describe("timer", function () {
 		spyOn(mockWriter, 'writeTime');
 		spyOn(mockWriter, 'writeTimeCostJson');
 		spyOn(buttonStyling, 'makeSayStop');
+		spyOn(buttonStyling, 'makeSayStart');
 	});
 	
     it("starts the timer", function () {
@@ -83,6 +84,12 @@ describe("timer", function () {
     it('should make button styled to stop on first toggle', function() {
 		timerUnderTest.toggleTimer();
 		expect(buttonStyling.makeSayStop).toHaveBeenCalled();
+    });
+    
+    it('should make button styled to start on second toggle', function() {
+    	timerUnderTest.toggleTimer();
+    	timerUnderTest.toggleTimer();
+    	expect(buttonStyling.makeSayStart).toHaveBeenCalled();
     });
     
     function minutesToMs(minutes) {
