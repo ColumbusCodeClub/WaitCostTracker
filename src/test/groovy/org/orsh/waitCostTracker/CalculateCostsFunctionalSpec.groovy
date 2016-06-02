@@ -138,6 +138,17 @@ class CalculateCostsFunctionalSpec extends Specification {
 			object.cost == "${costAtDefaultRateFor(hours)}"
 		
 	}
+	
+	def "should round to the nearest penny" () {
+		given:
+			def minutes = 20
+		when:
+			get("/calculate/costByDuration/" + minutes)
+			
+		then:
+			def object = jsonSlurper.parseText(response.body.text)
+			object.cost == "${Math.round(costAtDefaultRateFor(minutes/60)*100)/100}"
+	}
 
 	def ratePerMin(ratePerHour) {
 		return ratePerHour / 60
