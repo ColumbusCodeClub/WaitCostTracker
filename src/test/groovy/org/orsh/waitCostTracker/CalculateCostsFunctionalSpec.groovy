@@ -147,7 +147,7 @@ class CalculateCostsFunctionalSpec extends Specification {
 			
 		then:
 			def object = jsonSlurper.parseText(response.body.text)
-			object.cost == "${Math.round(costAtDefaultRateFor(minutes/60)*100)/100}"
+			object.cost == "16.67" //assumes default hourly rate of 50
 	}
 
 	def ratePerMin(ratePerHour) {
