@@ -18,6 +18,6 @@ class RequestCallsPersisterSpec extends Specification {
 		underTest.getResponse(minutes)
 				
 		then:
-		1*mockCharliePersister.persist('{"duration": "1234","cost": "1028.33"}')
+		1*mockCharliePersister.persist('{"duration": "1234","cost": {"value":1028.33}}')
 	}
 }
