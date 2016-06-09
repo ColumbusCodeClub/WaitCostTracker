@@ -124,8 +124,11 @@ class CalculateCostsFunctionalSpec extends Specification {
 			
 		then:
 			def object = jsonSlurper.parseText(response.body.text)
-			object.cost == "${costAtDefaultRateFor(hours)}"
+			object.cost instanceof Map
+			object.cost.value == costAtDefaultRateFor(hours)
+			
 	}
+	
 	
 	def "should return cost of 100 for 120 minutes" () {
 		given:
@@ -135,7 +138,7 @@ class CalculateCostsFunctionalSpec extends Specification {
 			
 		then:
 			def object = jsonSlurper.parseText(response.body.text)
-			object.cost == "${costAtDefaultRateFor(hours)}"
+			object.cost.value == costAtDefaultRateFor(hours)
 		
 	}
 	
@@ -147,7 +150,7 @@ class CalculateCostsFunctionalSpec extends Specification {
 			
 		then:
 			def object = jsonSlurper.parseText(response.body.text)
-			object.cost == "16.67" //assumes default hourly rate of 50
+			object.cost.value == 16.67 //assumes default hourly rate of 50
 	}
 
 	def ratePerMin(ratePerHour) {

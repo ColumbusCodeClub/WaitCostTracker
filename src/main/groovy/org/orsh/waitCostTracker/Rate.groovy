@@ -11,10 +11,7 @@ import java.math.RoundingMode;
 
 	def times(multiplier) {
 		System.out.println(hourly * multiplier.value)
-		roundToHundredths(hourly * multiplier.value)
+		[value: (hourly * multiplier.value).round(2)]
 	}
 	
-	def roundToHundredths(input) {
-		input.round(2)
-	}
 }

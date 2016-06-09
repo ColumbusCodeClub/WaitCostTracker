@@ -1,6 +1,7 @@
 package org.orsh.waitCostTracker
 
 import static org.orsh.waitCostTracker.Rate.DEFAULT_RATE
+import static groovy.json.JsonOutput.toJson
 
 class ResponseHandler {
 	PersistenceHandler persister;
@@ -15,7 +16,7 @@ class ResponseHandler {
 			return "raiseTimeLimitError"
 		} else {
 			def hours = [ value: minutes.toInteger()/60 ]
-			def response = '{"duration": "' + minutes + '","cost": "' + DEFAULT_RATE.times(hours) + '"}'
+			def response = '{"duration": "' + minutes + '","cost": ' + toJson(DEFAULT_RATE.times(hours)) + '}'
 			persister.persist(response)
 			response
 		}

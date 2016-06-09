@@ -30,6 +30,6 @@ class RateSpec extends Specification {
 		def cost = underTest.times(duration)
 		
 		then:
-		cost == 100
+		cost.value == 100.00
 	}
 }
