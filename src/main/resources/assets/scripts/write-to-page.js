@@ -12,7 +12,7 @@ PageWriter = function(){
 	function writeTimeCostJson(value) {
 		console.log("json value: " + value);
 		var obj = JSON.parse(value);
-		writeCost(obj.cost);
+		writeCost(obj.cost.value);
 		writeTime(obj.duration);
 	}
 	

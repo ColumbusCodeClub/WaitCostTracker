@@ -36,7 +36,7 @@ describe("writer", function () {
 	});
 	
 	it("writes time and cost to the page", function() {
-		pageWriterUnderTest.writeTimeCostJson('{"duration":"00:05", "cost":"12.00"}');
+		pageWriterUnderTest.writeTimeCostJson('{"duration":"00:05", "cost":{"value":"12.00"}}');
 		expect(jQueryMockObject.html).toHaveBeenCalledWith("00:05");
 		expect(jQueryMockObject.html).toHaveBeenCalledWith("12.00");
 	})
