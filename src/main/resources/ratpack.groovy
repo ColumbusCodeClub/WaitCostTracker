@@ -29,6 +29,7 @@ ratpack {
 			
 			ResponseHandler responseHandler = new ResponseHandler(persister)
 			def response = responseHandler.getResponse(minutes)
+			cookie('foo', 'bar')
 			if(response == "raiseTimeLimitError") {
 				raiseTimeLimitError(context)
 			} else {
