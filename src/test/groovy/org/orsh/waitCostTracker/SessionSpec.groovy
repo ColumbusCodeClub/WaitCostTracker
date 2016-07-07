@@ -29,4 +29,18 @@ class SessionSpec extends Specification {
 		!cookies.isEmpty()
 	}
 	
+	def "should not create a cookie if cookie already exists"() {
+		given:
+			def minutes = 20
+			
+			when:
+				def newHeader = getHeaders
+				newHeader.set("set-cookie", "foo=notBar")
+				get("/calculate/costByDuration/" + minutes)
+				def cookies = getCookies()
+				
+				then:
+					cookies == ["foo","notBar"]
+	}
+	
 }
