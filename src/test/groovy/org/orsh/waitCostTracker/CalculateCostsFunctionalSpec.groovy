@@ -93,6 +93,7 @@ class CalculateCostsFunctionalSpec extends Specification {
 		get("/calculate/costByDuration/" + "foo")
 
 		then:
+		println "=========" + response + "=========="
 		400 == response.getStatusCode()
 	}
 	
