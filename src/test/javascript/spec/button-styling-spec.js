@@ -19,7 +19,7 @@ describe("button styling", function () {
     	
     	it("should say stop", function() {
     		buttonStyling.makeSayStop();
-    		expect(mockButton.html).toHaveBeenCalledWith("Stop");
+    		expect(mockButton.html).toHaveBeenCalledWith('<i class="fa fa-stop" aria-hidden="true"></i> Stop');
     	});
     	it("should add btn-danger class to button", function() {
 			buttonStyling.makeSayStop();
@@ -31,7 +31,7 @@ describe("button styling", function () {
     	});
     	it ("should say start", function(){
     		buttonStyling.makeSayStart();
-    		expect(mockButton.html).toHaveBeenCalledWith("Start");
+    		expect(mockButton.html).toHaveBeenCalledWith('<i class="fa fa-play" aria-hidden="true"></i> Start');
     	});
     	it('should add btn-success class to button', function(){
     		buttonStyling.makeSayStart();

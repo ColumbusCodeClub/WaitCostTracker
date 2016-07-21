@@ -1,3 +1,7 @@
-h1 {
-	color: blue;
+.title {
+	font-family: 'Amatica SC', cursive;
+	font-size: 88px;
+   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+   -webkit-text-stroke-width: 1.5px;
+   -webkit-text-stroke-color: #b30000;
 }
