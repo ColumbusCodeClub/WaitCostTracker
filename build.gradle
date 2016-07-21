@@ -12,13 +12,14 @@ buildscript {
 		  }
 	}
 	dependencies { classpath "io.ratpack:ratpack-gradle:1.1.1",
-		 "gradle.plugin.com.craigburke.gradle:jasmine-gradle:1.2.0"
-				
+		 "gradle.plugin.com.craigburke.gradle:jasmine-gradle:1.2.0",
+		 "gradle.plugin.org.kravemir.gradle.sass:GradleSassPlugin:1.2.1"
 	}
 }
 
 apply plugin: "io.ratpack.ratpack-groovy"
 apply plugin: "com.craigburke.jasmine"
+apply plugin: "org.kravemir.gradle.sass"
 
 repositories { jcenter() 
 	maven {
@@ -38,6 +39,13 @@ dependencies {
 			// TODO we will need this later
 			// "org.gebish:geb-spock:0.10.+",
 			'org.spockframework:spock-core:1.0-groovy-2.4'
+}
+
+sass {
+	main {
+		srcDir = file("$projectDir/src/main/resources/assets/stylesheets")
+		outDir = file("$projectDir/src/main/resources/assets/stylesheets")
+	}
 }
 
 configurations {
