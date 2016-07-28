@@ -1,4 +1,5 @@
 package org.orsh.waitCostTracker
+import java.util.ArrayList
 
 class PersistenceHandler {
 	def folderPath
@@ -11,5 +12,18 @@ class PersistenceHandler {
 		File file = new File(folderPath)
 		file.createNewFile()
 		file.write(toPersist)
+	}
+
+	def read(toRead){
+		System.out.println("****" + folderPath)
+		File file = new File(folderPath, "dataFile.json")
+		def fileContents = [];
+		file.eachLine{
+			line -> 
+			fileContents << line
+
+		}
+	 println(fileContents)
+	 return fileContents
 	}
 }
