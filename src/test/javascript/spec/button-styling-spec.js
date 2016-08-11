@@ -8,9 +8,14 @@ describe("button styling", function () {
     				addClass: jasmine.createSpy('addClass'),
     				removeClass: jasmine.createSpy('removeClass')
         	};
+    		mockStopwatch = {
+    				removeAttr: jasmine.createSpy('removeAttr')
+    		};
     		$ = function(e) {
         		if(e === '.timer-toggle-btn') {
         			return mockButton;
+        		} else if (e === '#stopwatch-hand') {
+        			return mockStopwatch;
         		} else {
         			return {};
         		}
@@ -40,5 +45,9 @@ describe("button styling", function () {
     	it('should remove btn-red class', function(){
     		buttonStyling.makeSayStart();
     		expect(mockButton.removeClass).toHaveBeenCalledWith('btn-red');
+    	});
+    	it('should remove transform', function(){
+    		buttonStyling.makeSayStart();
+    		expect(mockStopwatch.removeAttr).toHaveBeenCalledWith('transform');
     	});
     });
