@@ -1,7 +1,40 @@
 .title {
 	font-family: 'Amatica SC', cursive;
 	font-size: 88px;
-   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-   -webkit-text-stroke-width: 1.5px;
-   -webkit-text-stroke-color: #b30000;
+	-webkit-text-fill-color: white;
+	-webkit-text-stroke-width: 1.5px;
+	-webkit-text-stroke-color: #b30000;
+}
+
+.results {
+	font-family: 'Monda', sans-serif;
+	font-size: 18px;
+}
+
+.btn {
+	font-family: 'Changa One', cursive;
+	border: none;
+	border-radius: 10px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: auto;
+}
+
+.btn-green {
+	background-color: #4CAF50;
+}
+
+.btn-red {
+	background-color: #e60000; 
+}
+
+.header {
+  background-color: #f2f2f2;
+  border-color: #f2f2f2;
+  padding:20px;
+  border-radius: 10px;
 }
