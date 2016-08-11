@@ -52,7 +52,8 @@ public class PersistenceHandlerSpec extends Specification {
 
         then:
         assert jsonContents.startdate == '2/20/2015 10:00:25'
-
+        assert jsonContents.stopdate == '2/20/2015 12:00:25'
+        assert jsonContents.rate == '50.00'
     }
 
 
