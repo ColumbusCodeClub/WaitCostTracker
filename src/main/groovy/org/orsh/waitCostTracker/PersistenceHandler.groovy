@@ -16,7 +16,7 @@ class PersistenceHandler {
 
 	def read(toRead){
 		System.out.println("****" + folderPath)
-		File file = new File(folderPath, "dataFile.json")
+		File file = new File(folderPath)
 		def fileContents = [];
 		file.eachLine{
 			line -> 
