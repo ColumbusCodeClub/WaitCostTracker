@@ -1,14 +1,13 @@
 .title {
-	font-family: 'Amatica SC', cursive;
-	font-size: 88px;
-	-webkit-text-fill-color: white;
-	-webkit-text-stroke-width: 1.5px;
-	-webkit-text-stroke-color: #b30000;
+	font-family: 'Arapey', serif;
+	font-size: 58px;
+	color: white;
 }
 
 .results {
-	font-family: 'Monda', sans-serif;
+	font-family: 'Old Standard TT', serif;
 	font-size: 18px;
+	color: white;
 }
 
 .btn {
@@ -33,8 +32,8 @@
 }
 
 .header {
-  background-color: #f2f2f2;
-  border-color: #f2f2f2;
+  background-color: #002a5f;
+  border-color: #002a5f;
   padding:20px;
   border-radius: 10px;
 }
