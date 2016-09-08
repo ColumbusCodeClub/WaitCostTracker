@@ -1,0 +1,41 @@
+.title {
+	font-family: 'Arapey', serif;
+	font-size: 58px;
+	color: white;
+}
+
+.results {
+	font-family: 'Old Standard TT', serif;
+	font-size: 18px;
+	color: white;
+	padding-bottom: 15px;
+    padding-left: 35px;
+}
+
+.btn {
+	font-family: 'Changa One', cursive;
+	border: none;
+	border-radius: 10px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: auto;
+}
+
+.btn-green {
+	background-color: #4CAF50;
+}
+
+.btn-red {
+	background-color: #e60000; 
+}
+
+.header {
+  background-color: #002a5f;
+  border-color: #002a5f;
+  padding:20px;
+  border-radius: 10px;
+}

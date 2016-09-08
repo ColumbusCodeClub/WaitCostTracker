@@ -8,9 +8,14 @@ describe("button styling", function () {
     				addClass: jasmine.createSpy('addClass'),
     				removeClass: jasmine.createSpy('removeClass')
         	};
+    		mockStopwatch = {
+    				removeAttr: jasmine.createSpy('removeAttr')
+    		};
     		$ = function(e) {
         		if(e === '.timer-toggle-btn') {
         			return mockButton;
+        		} else if (e === '#stopwatch-hand') {
+        			return mockStopwatch;
         		} else {
         			return {};
         		}
@@ -19,26 +24,30 @@ describe("button styling", function () {
     	
     	it("should say stop", function() {
     		buttonStyling.makeSayStop();
-    		expect(mockButton.html).toHaveBeenCalledWith("Stop");
+    		expect(mockButton.html).toHaveBeenCalledWith('<i class="fa fa-stop" aria-hidden="true"></i>  STOP');
     	});
-    	it("should add btn-danger class to button", function() {
+    	it("should add btn-red class to button", function() {
 			buttonStyling.makeSayStop();
-			expect(mockButton.addClass).toHaveBeenCalledWith('btn-danger');
+			expect(mockButton.addClass).toHaveBeenCalledWith('btn-red');
     	});
-    	it("should remove btn-success class from button", function() {
+    	it("should remove btn-green class from button", function() {
     		buttonStyling.makeSayStop();
-			expect(mockButton.removeClass).toHaveBeenCalledWith('btn-success');
+			expect(mockButton.removeClass).toHaveBeenCalledWith('btn-green');
     	});
     	it ("should say start", function(){
     		buttonStyling.makeSayStart();
-    		expect(mockButton.html).toHaveBeenCalledWith("Start");
+    		expect(mockButton.html).toHaveBeenCalledWith('<i class="fa fa-play" aria-hidden="true"></i> START');
     	});
-    	it('should add btn-success class to button', function(){
+    	it('should add btn-green class to button', function(){
     		buttonStyling.makeSayStart();
-    		expect(mockButton.addClass).toHaveBeenCalledWith('btn-success');
+    		expect(mockButton.addClass).toHaveBeenCalledWith('btn-green');
     	});
-    	it('should remove btn-danger class', function(){
+    	it('should remove btn-red class', function(){
     		buttonStyling.makeSayStart();
-    		expect(mockButton.removeClass).toHaveBeenCalledWith('btn-danger');
+    		expect(mockButton.removeClass).toHaveBeenCalledWith('btn-red');
+    	});
+    	it('should remove transform', function(){
+    		buttonStyling.makeSayStart();
+    		expect(mockStopwatch.removeAttr).toHaveBeenCalledWith('transform');
     	});
     });

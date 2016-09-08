@@ -2,24 +2,46 @@
 <html>
   <head>
      <title>Wait Cost Tracker</title>
-      <!--  <link rel="stylesheet" type="text/css" href="/stylesheets/test.css"/> -->
       <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Amatica+SC|Bungee+Inline|Bungee+Outline|Old-Standard-TT|Changa+One|Arapey" rel="stylesheet">
+	<script src="https://use.fontawesome.com/4fe929a566.js"></script>
 	<script src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> 
+     <link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
   </head>
   <body>
   	<div class="container">
-	  	<div class="jumbotron">
-		     <h1><center>Wait Cost Tracker</center></h1>
+	  	<div class="header">
+		     <h1 class="title"><center>WAIT COST TRACKER</center></h1>
 		     <center>
-		     	<button type="button" onclick="timer.toggleTimer()" class="timer-toggle-btn btn btn-success">Start</button>
+		     	<button type="button" onclick="timer.toggleTimer()" class="timer-toggle-btn btn btn-green">  
+					<i class="fa fa-play" aria-hidden="true"></i> START</button>
+					<br/>
+					<svg height="250" width="250">
+						  <circle cx="125" cy="125" r="120" stroke="black" stroke-width="3" fill="white"></circle>
+						  <line x1="125" y1="5" x2="125" y2="15" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+						  <line x1="185" y1="21" x2="180" y2="30" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+						  <line x1="229" y1="65" x2="220" y2="70" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+						  <line x1="245" y1="125" x2="235" y2="125" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+						  <line x1="229" y1="185" x2="220" y2="180" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+						  <line x1="185" y1="229" x2="180" y2="220" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+						  <line x1="125" y1="245" x2="125" y2="235" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+						  <line x1="21" y1="185" x2="30" y2="180" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+						  <line x1="65" y1="229" x2="70" y2="220" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+						  <line x1="5" y1="125" x2="15" y2="125" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+						  <line x1="21" y1="65" x2="30" y2="70" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+						  <line x1="65" y1="21" x2="70" y2="30" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+  						  <line id="stopwatch-hand" x1="125" y1="125" x2="125" y2="5" style="stroke:rgb(256,0,0);stroke-width:2"></line>
+					</svg>
 		     </center>
-		     <div id="timer">
-		     	<span id="time">15:00:12 time waiting </span>
-		     	<span id="cost">at 100.00 per hr</span>
+		     <div id="timer" class="results">
+		     	<div id="time">Current Time</div>
+		     	<div id="cost">Current Cost</div>
 		   	</div>
-		    <div id="totalCostOfWaiting">1,000,000.00</div>
+		   	<div id="total" class="results">
+		   		<div id="totalTime">Total Time: 5000 minutes</div>
+		     	<div id="totalCost">Total Cost: \$1,000,000.00</div>
+		   	</div>
 	   	</div>
    	</div>
    	
