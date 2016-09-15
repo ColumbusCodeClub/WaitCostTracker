@@ -6,3 +6,4 @@ dataFile.json
 .settings/
 bin/
 build/
+sample.db
