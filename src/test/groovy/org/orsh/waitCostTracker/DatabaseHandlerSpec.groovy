@@ -7,7 +7,7 @@ import spock.lang.Specification
 class DatabaseHandlerSpec extends Specification {
 	def "should add leo to db"() {
 		given:
-			def sql = Sql.newInstance("jdbc:sqlite:sample.db", "org.sqlite.JDBC")
+			def sql = Sql.newInstance("jdbc:sqlite:waitCostTracker.db", "org.sqlite.JDBC")
 		when:
 			sql.execute("drop table if exists person")
 			sql.execute("create table person (id integer, name string)")
@@ -33,7 +33,7 @@ class DatabaseHandlerSpec extends Specification {
 		given:
 			DatabaseHandler underTest = new DatabaseHandler()
 		when:
-			underTest.addJSON(/{"name":"nate","time":"20", "cost":"100"}/)
+			underTest.addJSON('{"name":"nate","duration":"20", "cost":{"value":100}}')
 		then:
 			underTest.getWaitCost("nate") == 100.00
 	}

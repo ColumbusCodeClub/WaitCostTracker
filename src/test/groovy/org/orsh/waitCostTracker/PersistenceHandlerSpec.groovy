@@ -3,19 +3,17 @@ package org.orsh.waitCostTracker;
 import spock.lang.Specification;
 
 public class PersistenceHandlerSpec extends Specification {
-	def "should create a file and verify it exists"() {
+
+	def "should persist call addJSON"() {
 		given:
-		def toPersist = "foo"
-		def folderLocation = System.getProperty("user.dir").toString() + "/dataFile.json";
-		PersistenceHandler underTest = new PersistenceHandler()
-		File file = new File(folderLocation);
-
+		def jsonToPersist = /{"name":"nate","time":"20", "cost":"100"}/
+		DatabaseHandler mockDatabaseHandler = Mock()
+		PersistenceHandler underTest = new PersistenceHandler(mockDatabaseHandler)
+		
 		when:
-		underTest.persist(toPersist)
-
+		underTest.persist(jsonToPersist)
+		
 		then:
-		file.exists() == true
-		file.delete()
-	}
-	
+		1*mockDatabaseHandler.addJSON(jsonToPersist)
+	}	
 }

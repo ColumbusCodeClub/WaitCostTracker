@@ -1,15 +1,13 @@
 package org.orsh.waitCostTracker
 
 class PersistenceHandler {
-	def folderPath
+	DatabaseHandler databaseHandler
 
-	PersistenceHandler() {
-		folderPath = System.getProperty("user.dir").toString() + "/dataFile.json";
+	PersistenceHandler(databaseHandler) {
+		this.databaseHandler = databaseHandler
 	}
 
 	def persist(toPersist){
-		File file = new File(folderPath)
-		file.createNewFile()
-		file.write(toPersist)
+		databaseHandler.addJSON(toPersist)
 	}
 }

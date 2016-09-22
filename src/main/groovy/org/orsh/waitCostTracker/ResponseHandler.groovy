@@ -4,7 +4,7 @@ import static org.orsh.waitCostTracker.Rate.DEFAULT_RATE
 import static groovy.json.JsonOutput.toJson
 
 class ResponseHandler {
-	PersistenceHandler persister;
+	PersistenceHandler persister
 
 	public ResponseHandler(persister) {
 		this.persister = persister

@@ -5,16 +5,16 @@ import groovy.sql.Sql
 import groovy.json.JsonSlurper
 
 class DatabaseHandler {
-	def sql = Sql.newInstance("jdbc:sqlite:sample.db", "org.sqlite.JDBC")
+	def sql = Sql.newInstance("jdbc:sqlite:waitCostTracker.db", "org.sqlite.JDBC")
 	def waitCostTracker = sql.dataSet("WAIT_COST_TRACKER")
 	
 	def createWaitCostTrackerTable() {
-		sql.execute("create table if not exists WAIT_COST_TRACKER (id integer primary key, name string, time integer, cost real)")
+		sql.execute("create table if not exists WAIT_COST_TRACKER (id integer primary key, name string, duration integer, cost real)")
 	}
 
-	def addWaitCostTime(name, time, cost) {
+	def addWaitCostTime(name, duration, cost) {
 		createWaitCostTrackerTable()
-		waitCostTracker.add(name:name, time:time, cost:cost)
+		waitCostTracker.add(name:name, duration:duration, cost:cost)
 	}
 	
 	def getWaitCost(name) {
@@ -27,7 +27,7 @@ class DatabaseHandler {
 		def slurper = new JsonSlurper()
 		def waitCostObject = slurper.parseText(json)
 		
-		addWaitCostTime(waitCostObject.name, waitCostObject.time, waitCostObject.cost)
+		addWaitCostTime(waitCostObject.name, waitCostObject.duration, waitCostObject.cost.value)
 	}
 	
 	def emptyTable() {

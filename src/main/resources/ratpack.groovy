@@ -7,6 +7,7 @@ import java.time.Duration;
 
 import static ratpack.groovy.Groovy.groovyTemplate
 
+import org.orsh.waitCostTracker.DatabaseHandler
 import org.orsh.waitCostTracker.PersistenceHandler
 import org.orsh.waitCostTracker.ResponseHandler;
 import org.orsh.waitCostTracker.Rate
@@ -14,7 +15,8 @@ import org.orsh.waitCostTracker.Timer
 
 
 ratpack {
-	PersistenceHandler persister = new PersistenceHandler()
+	DatabaseHandler databaseHandler = new DatabaseHandler()
+	PersistenceHandler persister = new PersistenceHandler(databaseHandler)
 	bindings { module TextTemplateModule }
 	handlers {
 		get { render groovyTemplate("index.html") }

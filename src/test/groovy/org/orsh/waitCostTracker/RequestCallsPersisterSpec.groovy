@@ -11,13 +11,13 @@ class RequestCallsPersisterSpec extends Specification {
 	
 	def "should call persistor"()  {
 		setup:
-		PersistenceHandler mockCharliePersister = Mock()
-		ResponseHandler underTest = new ResponseHandler(mockCharliePersister)
+		PersistenceHandler mockPersister = Mock()
+		ResponseHandler underTest = new ResponseHandler(mockPersister)
 		def minutes = "1234"
 		when:
 		underTest.getResponse(minutes)
 				
 		then:
-		1*mockCharliePersister.persist('{"duration": "1234","cost": {"value":1028.33}}')
+		1*mockPersister.persist('{"duration": "1234","cost": {"value":1028.33}}')
 	}
 }
