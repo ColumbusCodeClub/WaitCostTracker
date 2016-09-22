@@ -14,9 +14,9 @@ import ratpack.test.handling.HandlingResult;
 import static org.junit.Assert.assertEquals;
 
 class CookiesHandlerSpec extends Specification {
-
 	def "should not overwrite cookie value if it exists"() {
 		when:
+		
 		HandlingResult result = RequestFixture.handle(new CookieHandler(), {fixture ->
 			fixture.header("set-cookie", "foo=chocolate")}
 		)
