@@ -93,7 +93,6 @@ class CalculateCostsFunctionalSpec extends Specification {
 		get("/calculate/costByDuration/" + "foo")
 
 		then:
-		println "=========" + response + "=========="
 		400 == response.getStatusCode()
 	}
 	
@@ -129,20 +128,7 @@ class CalculateCostsFunctionalSpec extends Specification {
 			object.cost.value == costAtDefaultRateFor(hours)
 			
 	}
-	
-	
-	def "should return cost of 100 for 120 minutes" () {
-		given:
-			def hours = 2
-		when:
-			get("/calculate/costByDuration/" + minutesFor(hours))
-			
-		then:
-			def object = jsonSlurper.parseText(response.body.text)
-			object.cost.value == costAtDefaultRateFor(hours)
 		
-	}
-	
 	def "should round to the nearest penny" () {
 		given:
 			def minutes = 20

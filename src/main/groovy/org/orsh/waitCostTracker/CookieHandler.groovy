@@ -9,7 +9,7 @@ public class CookieHandler implements Handler {
 			  outputHeaderValue = "foo=bar"
 		  }
 		  ctx.getResponse().getHeaders().set("set-cookie", outputHeaderValue)
-		  ctx.render("received:")
+		  ctx.next()
 		}
 }
 

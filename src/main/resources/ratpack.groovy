@@ -9,9 +9,10 @@ import static ratpack.groovy.Groovy.groovyTemplate
 
 import org.orsh.waitCostTracker.DatabaseHandler
 import org.orsh.waitCostTracker.PersistenceHandler
-import org.orsh.waitCostTracker.ResponseHandler;
+import org.orsh.waitCostTracker.ResponseHandler
 import org.orsh.waitCostTracker.Rate
 import org.orsh.waitCostTracker.Timer
+import org.orsh.waitCostTracker.CookieHandler
 
 
 ratpack {
@@ -31,7 +32,8 @@ ratpack {
 			
 			ResponseHandler responseHandler = new ResponseHandler(persister)
 			def response = responseHandler.getResponse(minutes)
-			context.getResponse().cookie('foo', 'bar')
+			CookieHandler cookieHandler = new CookieHandler()
+			cookieHandler.handle(context)
 			if(response == "raiseTimeLimitError") {
 				raiseTimeLimitError(context)
 			} else {
