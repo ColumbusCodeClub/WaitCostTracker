@@ -30,10 +30,10 @@ ratpack {
 		get("calculate/costByDuration/:time") {
 			def minutes = context.pathTokens['time']
 			
-			ResponseHandler responseHandler = new ResponseHandler(persister)
-			def response = responseHandler.getResponse(minutes)
 			CookieHandler cookieHandler = new CookieHandler()
 			cookieHandler.handle(context)
+			ResponseHandler responseHandler = new ResponseHandler(persister,context.getResponse().getHeaders().get("set-cookie"))
+			def response = responseHandler.getResponse(minutes)
 			if(response == "raiseTimeLimitError") {
 				raiseTimeLimitError(context)
 			} else {
