@@ -8,6 +8,8 @@ import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
 import ratpack.test.ServerBackedApplicationUnderTest
 import ratpack.test.http.TestHttpClient
 import spock.lang.Specification
+import ratpack.handling.Context
+import ratpack.http.Request
 
 import ratpack.test.handling.RequestFixture;
 import ratpack.test.handling.HandlingResult;
@@ -26,10 +28,25 @@ class CookiesHandlerSpec extends Specification {
 	}
 	
 	def "should set cookie value if it does not exist"() {
+		given:
+		UniqueId uniqueId = new UniqueId()
+		CookieHandler underTest = new CookieHandler(uniqueId)
 		when:
-		HandlingResult result = RequestFixture.handle(new CookieHandler(), {})
+		HandlingResult result = RequestFixture.handle(underTest, {})
 
 		then:
-		assertEquals("foo=bar", result.getHeaders().get("set-cookie"))
+		assertEquals("boop123", result.getHeaders().get("set-cookie"))
+	}
+	
+	def "should call UniqueId to get cookie name"() {
+		given:
+			UniqueId mockUniqueId = Mock()
+			CookieHandler underTest = new CookieHandler(mockUniqueId)
+			
+			when:
+				HandlingResult result = RequestFixture.handle(underTest, {})
+				
+				then:
+					1*mockUniqueId.getId()
 	}
 }

@@ -3,10 +3,16 @@ import ratpack.handling.Handler
 import ratpack.handling.Context
 
 public class CookieHandler implements Handler {
+		UniqueId uniqueId
+		
+		public CookieHandler(UniqueId uniqueId) {
+			this.uniqueId = uniqueId
+		}
+		
 		public void handle(Context ctx) throws Exception {
 		  String outputHeaderValue = ctx.getRequest().getHeaders().get("set-cookie")
 		  if (outputHeaderValue == null) {
-			  outputHeaderValue = "foo=bar"
+			  outputHeaderValue = uniqueId.getId()
 		  }
 		  ctx.getResponse().getHeaders().set("set-cookie", outputHeaderValue)
 		  ctx.next()
